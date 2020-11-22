@@ -61,6 +61,32 @@ alert(*!*user.name*/!*); // 'Pete', changes are seen from the "user" reference
 
 The example above demonstrates that there is only one object. As if we had a cabinet with two keys and used one of them (`admin`) to get into it. Then, if we later use another key (`user`) we can see changes.
 
+## Const objects can be modified
+
+There's another important "side effect" of storing objects as references.
+
+An object declared as `const` can be modified.
+
+For instance:
+
+```js run
+const user = {
+  name: "John"
+};
+
+*!*
+user.name = "Pete"; // (*)
+*/!*
+
+alert(user.name); // Pete
+```
+
+It might seem that the line `(*)` would cause an error, but no. The `const` fixes the value of `user`, so it must always reference the same object. But it says nothing about properties of that object.
+
+In other words, the `const user` gives an error only if we try to set `user=...` as a whole.
+
+If we really need to make constant object properties, that's also possible, but with totally different methods, we'll cover them later in the chapter <info:property-descriptors>.
+
 ## Comparison by reference
 
 The equality `==` and strict equality `===` operators for objects work exactly the same.
